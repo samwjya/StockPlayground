@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Editor from "@monaco-editor/react";
 
 import {
   Chart as ChartJS,
@@ -68,12 +69,19 @@ function App() {
         value={end}
         onChange={e => setEnd(e.target.value)}
       />
-      <textarea
-        className="w-full p-2 border rounded font-mono h-32"
+      <Editor
+        height="300px"
+        defaultLanguage="python"
         value={code}
-        onChange={e => setCode(e.target.value)}
-      />
-
+        onChange={(val) => setCode(val || "")}
+        theme="vs-dark"
+        options={{
+            fontSize: 14,
+            minimap: { enabled: false },
+            wordWrap: "on",
+            automaticLayout: true,
+        }}
+       />
       <button
         onClick={handleRun}
         disabled={loading}

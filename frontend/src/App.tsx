@@ -47,10 +47,21 @@ function App() {
         </button>
 
         {output && (
-          <div className="mt-4 p-4 bg-gray-100 rounded">
-            <pre className="text-sm whitespace-pre-wrap">{JSON.stringify(output, null, 2)}</pre>
-          </div>
-        )}
+            <div className="mt-4 p-4 bg-gray-100 rounded w-full max-w-2xl">
+                <h2 className="text-xl font-semibold mb-2 text-gray-800">📊 Strategy Results</h2>
+                {output.summary ? (
+                <ul className="list-disc pl-6 text-sm text-gray-800">
+                    <li><strong>Sharpe Ratio:</strong> {output.summary.sharpe}</li>
+                    <li><strong>Cumulative Return:</strong> {(output.summary.cumulative_return * 100).toFixed(2)}%</li>
+                    <li><strong>Max Drawdown:</strong> {(output.summary.max_drawdown * 100).toFixed(2)}%</li>
+                    <li><strong>Win Rate:</strong> {(output.summary.win_rate * 100).toFixed(2)}%</li>
+                    <li><strong>Trading Days:</strong> {output.summary.trading_days ?? output.summary.total_days}</li>
+                </ul>
+                ) : (
+                <pre className="text-sm whitespace-pre-wrap text-red-600">{output.error}</pre>
+                )}
+            </div>
+            )}
       </div>
     </div>
   );

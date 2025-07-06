@@ -102,3 +102,5 @@ def backtest(request: StrategyRequest):
     except Exception as e:
         print("Exception occurred:", str(e))
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+
+        

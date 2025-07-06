@@ -62,6 +62,11 @@ def backtest(request: StrategyRequest):
             sharpe_ratio = np.mean(df['daily_return']) / daily_return_std * np.sqrt(252)
         
         cum_returns = (1 + df['daily_return']).cumprod()
+
+        cumulative_return_series = [
+            {"date": str(date.date()), "value": float(value)}
+            for date, value in cum_returns.items()
+        ]
         rolling_max = cum_returns.cummax()
         drawdown = cum_returns / rolling_max - 1
         max_drawdown = drawdown.min()
@@ -73,7 +78,8 @@ def backtest(request: StrategyRequest):
             "max_drawdown": round(max_drawdown, 4),
             "win_rate": round(win_rate, 4),
             "price_column_used": price_column,
-            "total_days": len(df)
+            "total_days": len(df),
+            "cumulative_series": cumulative_return_series 
         }
 
         return {

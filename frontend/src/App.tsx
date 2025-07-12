@@ -47,24 +47,23 @@ function App() {
   };
 
   return (
-  <div className="min-h-screen bg-gray-50 flex flex-col items-center p-8">
-    <h1 className="text-3xl font-bold mb-6 text-blue-700">QuantPlayground</h1>
+    <div className="app-container">
+      <h1>QuantPlayground</h1>
 
-    <div className="w-full max-w-2xl bg-white shadow p-6 rounded-lg space-y-4">
       <input
-        className="w-full p-2 border rounded"
+        className="input"
         placeholder="Ticker (e.g. AAPL)"
         value={ticker}
         onChange={e => setTicker(e.target.value)}
       />
       <input
-        className="w-full p-2 border rounded"
+        className="input"
         placeholder="Start date (YYYY-MM-DD)"
         value={start}
         onChange={e => setStart(e.target.value)}
       />
       <input
-        className="w-full p-2 border rounded"
+        className="input"
         placeholder="End date (YYYY-MM-DD)"
         value={end}
         onChange={e => setEnd(e.target.value)}
@@ -76,26 +75,22 @@ function App() {
         onChange={(val) => setCode(val || "")}
         theme="vs-dark"
         options={{
-            fontSize: 14,
-            minimap: { enabled: false },
-            wordWrap: "on",
-            automaticLayout: true,
+          fontSize: 14,
+          minimap: { enabled: false },
+          wordWrap: "on",
+          automaticLayout: true,
         }}
-       />
-      <button
-        onClick={handleRun}
-        disabled={loading}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
+      />
+      <button onClick={handleRun} disabled={loading}>
         {loading ? "Running..." : "Run Backtest"}
       </button>
 
       {output && (
-        <div className="mt-4 p-4 bg-gray-100 rounded w-full">
-          <h2 className="text-xl font-semibold mb-2 text-gray-800">📊 Strategy Results</h2>
+        <div className="results-box">
+          <h2>📊 Strategy Results</h2>
 
           {output.summary ? (
-            <ul className="list-disc pl-6 text-sm text-gray-800">
+            <ul>
               <li><strong>Sharpe Ratio:</strong> {output.summary.sharpe}</li>
               <li><strong>Cumulative Return:</strong> {(output.summary.cumulative_return * 100).toFixed(2)}%</li>
               <li><strong>Max Drawdown:</strong> {(output.summary.max_drawdown * 100).toFixed(2)}%</li>
@@ -103,12 +98,12 @@ function App() {
               <li><strong>Trading Days:</strong> {output.summary.trading_days ?? output.summary.total_days}</li>
             </ul>
           ) : (
-            <pre className="text-sm whitespace-pre-wrap text-red-600">{output.error}</pre>
+            <pre>{output.error}</pre>
           )}
 
           {output.summary?.cumulative_series && (
-            <div className="mt-6 bg-white rounded p-4 shadow">
-              <h2 className="text-lg font-semibold mb-2 text-gray-800">📈 Cumulative Return Chart</h2>
+            <div className="chart-box">
+              <h2>📈 Cumulative Return Chart</h2>
               <Line
                 data={{
                   labels: output.summary.cumulative_series.map((d: any) => d.date),
@@ -143,8 +138,7 @@ function App() {
         </div>
       )}
     </div>
-  </div>
-);
+  );
 }
 
 export default App;

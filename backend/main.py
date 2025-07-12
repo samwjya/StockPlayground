@@ -4,6 +4,9 @@ import pandas as pd
 import yfinance as yf
 import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
+import os
+from dotenv import load_dotenv
+import openai
 
 app = FastAPI()
 
@@ -103,4 +106,42 @@ def backtest(request: StrategyRequest):
         print("Exception occurred:", str(e))
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-        
+
+#OPEN AI features
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+class GenerateRequest(BaseModel):
+    description: str
+
+@app.post("/generate")
+def generate_strategy(request: GenerateRequest):
+    try:
+        prompt = f"""
+You are a quantitative trading assistant. Convert the following user request into a Python strategy function.
+
+Requirements:
+- Input: pandas DataFrame `df` with OHLCV data
+- Output: Boolean Series deciding when to be in the market
+
+Respond only with valid Python code defining a function called `strategy(df)`
+
+User request: "{request.description}"
+"""
+
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You write Python trading strategy functions."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.4,
+        )
+
+        code = response.choices[0].message.content.strip()
+
+        return { "code": code }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating strategy: {str(e)}")

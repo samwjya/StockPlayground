@@ -6,7 +6,7 @@ It simulates quant-style backtesting workflows and is built with production-leve
 
 ---
 
-## 🧠 Core Features
+##  Core Features
 
 - Write Python trading strategies in-browser
 - Backtest using real OHLCV historical stock data
@@ -16,7 +16,7 @@ It simulates quant-style backtesting workflows and is built with production-leve
 
 ---
 
-## 🧱 Project Architecture
+##  Project Architecture
 
 ```text
 [React Frontend] ←→ [FastAPI Backend] ←→ [Backtest Engine] ←→ [Historical Market Data]
@@ -26,10 +26,14 @@ It simulates quant-style backtesting workflows and is built with production-leve
 [OpenAI API (optional)]                     [DuckDB / PostgreSQL Storage]
 
 
-🔧 Tech Stack
+Tech Stack
 Frontend:	React, Tailwind CSS, Monaco Editor, Chart.js
 Backend:	FastAPI, Python, Pydantic
 Data Pipeline:	Airflow (or Prefect), yfinance / Yahoo Finance API
 Database:	DuckDB (or PostgreSQL), optional: S3/COS backup
 AI (optional):	OpenAI GPT-4 API
 Infra:	Docker, Terraform, GitHub Actions (CI/CD), GCP or Tencent
+
+venv (for backend)
+cd backend -> .\venv\Scripts\activate
+run backend -> uvicorn main:app --reload

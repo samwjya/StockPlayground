@@ -9,10 +9,10 @@ It simulates quant-style backtesting workflows and is built with production-leve
 ##  Core Features
 
 - Write Python trading strategies in-browser
-- Backtest using real OHLCV historical stock data
+- Backtest using real historical stock data
 - Get performance metrics: Sharpe ratio, drawdown, win rate, etc.
 - Visualize trades and performance over time
-- AI features (optional): Strategy explanation, code generation, coaching tips
+- AI features:code generation
 
 ---
 
@@ -22,17 +22,17 @@ It simulates quant-style backtesting workflows and is built with production-leve
 [React Frontend] ←→ [FastAPI Backend] ←→ [Backtest Engine] ←→ [Historical Market Data]
         ↑                                           ↓
      Monaco Editor                            [ETL Pipeline (Airflow)]
-        ↑                                           ↓
-[OpenAI API (optional)]                     [DuckDB / PostgreSQL Storage]
+        ↑                                              ↓
+[OpenAI API]                                    [PostgreSQL Storage]
 
 
 Tech Stack
-Frontend:	React, Tailwind CSS, Monaco Editor, Chart.js
+Frontend:	React, HTML, CSS, Monaco Editor, Chart.js
 Backend:	FastAPI, Python, Pydantic
-Data Pipeline:	Airflow (or Prefect), yfinance / Yahoo Finance API
-Database:	DuckDB (or PostgreSQL), optional: S3/COS backup
-AI (optional):	OpenAI GPT-4 API
-Infra:	Docker, Terraform, GitHub Actions (CI/CD), GCP or Tencent
+Data Pipeline:	yfinance / Yahoo Finance API
+Database:	PostgreSQK 
+AI:	        OpenAI GPT-4 API
+
 
 venv (for backend)
 cd backend -> .\venv\Scripts\activate

@@ -46,6 +46,22 @@ function App() {
     setLoading(false);
   };
 
+  interface GenerateResponse {
+    code: string;
+  }
+  const handleGenerate = async () => {
+    try {
+      const res = await axios.post<GenerateResponse>("http://localhost:8000/generate", {
+        description: "Buy when the 10-day SMA crosses above the 30-day SMA",
+      });
+      const aiCode = res.data.code;
+      setCode(aiCode);  
+    } catch (err: any) {
+      console.error(err);
+      alert("AI generation failed: " + (err.response?.data?.detail || err.message));
+    }
+  };
+
   return (
     <div className="app-container">
       <h1>QuantPlayground</h1>
@@ -81,6 +97,14 @@ function App() {
           automaticLayout: true,
         }}
       />
+
+      <button
+        onClick={handleGenerate}
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mb-2"
+      >
+        Generate Strategy with AI
+      </button>
+
       <button onClick={handleRun} disabled={loading}>
         {loading ? "Running..." : "Run Backtest"}
       </button>

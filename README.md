@@ -1,6 +1,6 @@
-# 📈 QuantPlayground
+#  StockPlayground
 
-**QuantPlayground** is a full-stack web application that allows users to write, test, and visualize custom trading strategies using real historical market data.
+**StockPlayground** is a full-stack web application that allows users to write, test, and visualize custom trading strategies using real historical market data.
 
 It simulates quant-style backtesting workflows and is built with production-level technologies across frontend, backend, and data infrastructure.
 

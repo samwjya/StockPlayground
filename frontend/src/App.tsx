@@ -143,7 +143,7 @@ function App() {
         {/* Results */}
         {output && (
           <div className="mt-6 bg-gray-100 p-4 rounded">
-            <h2 className="text-lg font-semibold mb-2 text-gray-800">📊 Strategy Results</h2>
+            <h2 className="text-lg font-semibold mb-2 text-gray-800"> Strategy Results</h2>
             {output.summary ? (
               <ul className="list-disc pl-6 text-sm text-gray-800">
                 <li><strong>Sharpe Ratio:</strong> {output.summary.sharpe}</li>
@@ -158,7 +158,7 @@ function App() {
 
             {output.summary?.cumulative_series && (
               <div className="mt-6 bg-white p-4 rounded shadow">
-                <h2 className="text-lg font-semibold mb-2 text-gray-800">📈 Cumulative Return Chart</h2>
+                <h2 className="text-lg font-semibold mb-2 text-gray-800">Cumulative Return Chart</h2>
                 <Line
                   data={{
                     labels: output.summary.cumulative_series.map((d: any) => d.date),

@@ -33,7 +33,9 @@ Data Pipeline:	yfinance / Yahoo Finance API
 Database:	PostgreSQK 
 AI:	        OpenAI GPT-4 API
 
+Run Backend: 
 
-venv (for backend)
-cd backend -> .\venv\Scripts\activate
-run backend -> uvicorn main:app --reload
+cd backend -> .\venv\Scripts\activate (Windows) -> uvicorn main:app --reload
+
+Run Frontend:
+cd frontend -> npm run dev

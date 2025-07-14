@@ -1,0 +1,1 @@
+{ "description": "Buy when the 10-day SMA crosses above the 30-day SMA" }

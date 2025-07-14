@@ -6,7 +6,7 @@ import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
-import openai
+from openai import OpenAI
 
 app = FastAPI()
 
@@ -109,6 +109,7 @@ def backtest(request: StrategyRequest):
 
 #OPEN AI features
 load_dotenv()
+client = OpenAI()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
@@ -130,8 +131,8 @@ Respond only with valid Python code defining a function called `strategy(df)`
 User request: "{request.description}"
 """
 
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
+        response =  client.chat.completions.create(
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You write Python trading strategy functions."},
                 {"role": "user", "content": prompt},

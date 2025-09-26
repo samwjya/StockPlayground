@@ -30,7 +30,7 @@ Tech Stack
 Frontend:	React, HTML, CSS, Monaco Editor, Chart.js
 Backend:	FastAPI, Python, Pydantic
 Data Pipeline:	yfinance / Yahoo Finance API
-Database:	PostgreSQK 
+Database:	PostgreSQL 
 AI:	        OpenAI GPT-4 API
 
 Run Backend: 

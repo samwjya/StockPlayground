@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-8">
-      <h1 className="text-3xl font-bold mb-6 text-blue-700">QuantPlayground</h1>
+      <h1 className="text-3xl font-bold mb-6 text-blue-700">StockPlayground</h1>
 
       <div className="w-full max-w-2xl bg-white shadow p-6 rounded-lg space-y-4">
         {mode === 'playground' ? (

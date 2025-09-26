@@ -20,10 +20,10 @@ It simulates quant-style backtesting workflows and is built with production-leve
 
 ```text
 [React Frontend] ←→ [FastAPI Backend] ←→ [Backtest Engine] ←→ [Historical Market Data]
-        ↑                                           ↓
-     Monaco Editor                            [ETL Pipeline (Airflow)]
-        ↑                                              ↓
-[OpenAI API]                                    [PostgreSQL Storage]
+        ↑                                           
+     Monaco Editor                           
+        ↑                                            
+[OpenAI API]                                   
 
 
 Tech Stack

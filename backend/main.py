@@ -13,7 +13,7 @@ app = FastAPI()
 # Allow frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,7 +111,7 @@ def backtest(request: StrategyRequest):
 load_dotenv()
 client = OpenAI()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class GenerateRequest(BaseModel):
     description: str

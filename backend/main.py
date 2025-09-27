@@ -146,3 +146,8 @@ User request: "{request.description}"
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating strategy: {str(e)}")
+
+
+@app.get("/healthz")
+def health():
+    return {"ok": True}

@@ -36,9 +36,9 @@ AI:	        OpenAI GPT-4 API
 ---
 
 #Backend
-        - Backend live on Render
-        - To run backend locally:       
-                cd backend -> .\venv\Scripts\activate (Windows) -> uvicorn main:app --reload
+- Backend live on Render
+- To run backend locally:       
+        cd backend -> .\venv\Scripts\activate (Windows) -> uvicorn main:app --reload
 
 Run Frontend:
 cd frontend -> npm run dev

@@ -33,9 +33,12 @@ Data Pipeline:	yfinance / Yahoo Finance API
 Database:	PostgreSQL 
 AI:	        OpenAI GPT-4 API
 
-Run Backend: 
+---
 
-cd backend -> .\venv\Scripts\activate (Windows) -> uvicorn main:app --reload
+#Backend
+        - Backend live on Render
+        - To run backend locally:       
+                cd backend -> .\venv\Scripts\activate (Windows) -> uvicorn main:app --reload
 
 Run Frontend:
 cd frontend -> npm run dev

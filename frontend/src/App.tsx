@@ -11,6 +11,8 @@ import {
   Legend
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import {supabase} from "./supabase";
+import api from "./api";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
@@ -40,18 +42,33 @@ function App() {
   const [generating, setGenerating] = useState(false);
 
   const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE || "https://stockplayground.onrender.com/",
+    baseURL: import.meta.env.VITE_API_BASE || "http://localhost:8000",
   });
-
+// "https://stockplayground.onrender.com/"
   const handleRun = async () => {
     setLoading(true);
     try {
+      const session = (await supabase.auth.getSession()).data.session;
+      const token = session?.access_token;
+
+      if (!token) {
+      alert("You must be logged in to run a backtest");
+      setLoading(false);
+      return;
+      }
+
       const res = await api.post<BacktestResponse>("/backtest", {
         code,
         ticker,
         start_date: start,
         end_date: end,
-      });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      } 
+    );
       setOutput(res.data);
     } catch (err: any) {
       console.error(err);

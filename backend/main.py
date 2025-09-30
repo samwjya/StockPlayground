@@ -1,14 +1,19 @@
-from fastapi import FastAPI, HTTPException
+from dotenv import load_dotenv
+load_dotenv()
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 import pandas as pd
 import yfinance as yf
 import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from dotenv import load_dotenv
 from openai import OpenAI
+from auth import get_user_id
+from supabase import save_strategy
+
 
 app = FastAPI()
+
 
 # Allow frontend access
 app.add_middleware(
@@ -26,7 +31,7 @@ class StrategyRequest(BaseModel):
     end_date: str
 
 @app.post("/backtest")
-def backtest(request: StrategyRequest):
+async def backtest(request: StrategyRequest, user_id: str=Depends(get_user_id)):
     print("Received request:")
     print("Ticker:", request.ticker)
     print("Start:", request.start_date)
@@ -98,6 +103,7 @@ def backtest(request: StrategyRequest):
             "cumulative_series": cumulative_series
         }
 
+        await save_strategy(user_id, request.code, result["win_rate"])
         return {"message": "Backtest executed", "summary": result}
 
     except HTTPException:
@@ -108,7 +114,6 @@ def backtest(request: StrategyRequest):
 
 
 #OPEN AI features
-load_dotenv()
 client = OpenAI()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
